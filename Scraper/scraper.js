@@ -1,0 +1,100 @@
+const R = require("ramda");
+const util = require("util");
+
+const {
+  getAllSubmissionsForContest,
+  getSubmission,
+} = require("./hackerrankAPI");
+
+const {
+  groupStudentsSubmissionsById,
+  groupSubmissionsByChallenge,
+  snooze,
+  writeJsonAsCsv,
+} = require("./utils");
+
+const main = () => {
+  const contestSlug = process.env.CONTEST_SLUG;
+  const cookie = process.env.COOKIE;
+
+  if (!contestSlug || !cookie) {
+    console.error("Process failed: Missing contest slug or cookie param");
+    process.exit(-1);
+  }
+
+  getAllSubmissionsForContest(cookie, contestSlug)
+    .then((res) => res.json())
+    .then(async (jsonResponse) => {
+      const grouped = groupStudentsSubmissionsById(jsonResponse.models);
+      const aux = R.map(groupSubmissionsByChallenge, grouped);
+
+      const studentIds = [];
+      const responses = [];
+
+      Object.keys(aux).forEach((studentId) => {
+        studentIds.push(studentId);
+      });
+
+      for (let j = 0; j < studentIds.length; j++) {
+        const studentSubmitedChallenges = aux[studentIds[j]];
+        const submissionsIds = [];
+
+        Object.keys(studentSubmitedChallenges).forEach((challengeId) => {
+          submissionsIds.push({
+            submissionId: studentSubmitedChallenges[challengeId][0].id,
+            challengeName:
+              studentSubmitedChallenges[challengeId][0].challenge.name,
+            score: studentSubmitedChallenges[challengeId][0].score,
+            studentUserName:
+              studentSubmitedChallenges[challengeId][0].hacker_username,
+          });
+        });
+
+        const totalSubmissions = studentIds.length;
+        console.log(
+          "Getting submissions ... ",
+          `${Math.round(((j + 1) / totalSubmissions * 100) * 100) / 100}%`
+        );
+
+        for (let i = 0; i < submissionsIds.length; i++) {
+          getSubmission(cookie, submissionsIds[i].submissionId, contestSlug,10,6000)
+            .then((submissionReposne) => submissionReposne.clone().json())
+            .then((submissionJson) => {
+              if(submissionJson.model.code == undefined){
+                i-=1;
+              }
+              else{
+                responses.push({
+                  studentId: studentIds[j],
+                  studentUserName: submissionsIds[i].studentUserName,
+                  challenge: submissionsIds[i].challengeName,
+                  score: submissionsIds[i].score,
+                  code: submissionJson.model.code,
+                });
+              }
+              
+            });
+          await snooze(6000);
+        }
+
+        //console.log(util.inspect(responses, false, null, true));
+      }
+      writeJsonAsCsv(responses,contestSlug);
+    })
+    .catch((error) => {
+      console.log('ERROR');
+      console.log(error);
+    });
+};
+
+main();
+
+const doSmt = async() => {
+  const contestSlug = process.env.CONTEST_SLUG;
+  const cookie = process.env.COOKIE;
+  getAllSubmissionsForContest(cookie, contestSlug).then(response => response.json()).then(r => console.log(r));
+  //console.log(response.json().then(r => console.log(r)));
+  //console.log(response.clone().json());
+}
+
+//doSmt();

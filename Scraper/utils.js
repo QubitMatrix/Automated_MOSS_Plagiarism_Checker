@@ -1,0 +1,34 @@
+const R = require("ramda");
+const converter = require("json-2-csv");
+const fs = require("fs");
+
+const groupStudentsSubmissionsById = R.groupBy((student) => student.hacker_id);
+
+/*
+  After the next method, the structure will be:
+  {
+    studentID:{
+      challengeId: [submissionId]
+    }
+  }
+*/
+const groupSubmissionsByChallenge = R.groupBy(
+  (submission) => submission.challenge_id
+);
+
+const writeJsonAsCsv = (jsonFile,name) => {
+  converter.json2csv(jsonFile, (err, csv) => {
+    if (err) {
+      throw err;
+    }
+
+    fs.writeFileSync(`${name}.csv`, csv);
+  });
+};
+
+const snooze = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+exports.groupStudentsSubmissionsById = groupStudentsSubmissionsById;
+exports.groupSubmissionsByChallenge = groupSubmissionsByChallenge;
+exports.snooze = snooze;
+exports.writeJsonAsCsv = writeJsonAsCsv;
