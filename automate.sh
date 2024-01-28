@@ -1,6 +1,5 @@
-slugs=$1 #contest slugs (space separated)
-IFS=" " read -a array <<<"$slugs"
-
+session=$1 
+array=('a' 'b' 'c' 'd' 'e' 'f' 'g' 'h' 'i' 'j' 'k')
 touch ./moss/plagiarismReport.csv
 if [ ! -s "./moss/plagiarismReport.csv" ];
 then
@@ -10,9 +9,11 @@ fi
 # Scrape all submissions from hackerrank
 cd Scraper
 npm install
-python3 scraper_script.py "$slugs"
+python3 scraper_script.py "$session"
 for slug in ${array[@]};
 do
+    slug="daa-s$session-$slug"
+    echo $slug
     cp $slug.csv ../Submission
 
     # Organize submissions into a separate folder for each student
@@ -34,5 +35,6 @@ do
 done
 
 echo -e "Plagiarism links will be available in ./moss/plagiarismReport.csv\n"
+
 
 
