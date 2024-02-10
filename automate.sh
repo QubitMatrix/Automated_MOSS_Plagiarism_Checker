@@ -35,6 +35,5 @@ do
 done
 
 echo -e "Plagiarism links will be available in ./moss/plagiarismReport.csv\n"
-
-
-
+cd ../moss
+bash ./gen_list.sh
