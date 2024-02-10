@@ -27,11 +27,13 @@ This is a guide to a MOSS Plagiarism Checker for Hacckerrank contests with custo
 
 ## Execution
 1. Move back to the main directory and execute the script   
-   `cd ../ && bash ./automate.sh "enter contest slugs here"`   
-   > Replace contest slugs with all the contest slugs (space separated) that are to be checked => Eg: `"daa-s1-a daa-s1-b"` can be given as contest slugs   
+   `cd ../ && bash ./automate.sh "enter session number here"`   
+   > Eg: `bash ./automate.sh 1` can generate report for all contests with daa-s1-'section'   
+   => Replace the sections list in `automate.sh` and `./Scraper/scraper_script.py` with the sections that you are handling  
 
 > If execution gives an error `/usr/bin/env: ‘bash\r’: No such file or directory` it might be due to npm not being installed, install npm on the WSL distro and try again
 
-The final link will be available in `./moss/plagiarismReport.csv`
+The final link will be available in `./moss/plagiarismReport.csv`   
+The list of students with plagiarism above threshold will be stored in individual files `'contest_slug'.txt`   
 
 If you have questions or ideas, just drop them in the issues section!
