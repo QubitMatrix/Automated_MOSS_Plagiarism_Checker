@@ -8,11 +8,13 @@ fi
 
 # Scrape all submissions from hackerrank
 cd Scraper
+mkdir -p Results
 npm install
 python3 scraper_script.py "$session"
 for slug in ${array[@]};
 do
     slug="daa-s$session-$slug"
+	python3 leaderboard.py "https://www.hackerrank.com/contests/$slug/leaderboard"
     echo $slug
     cp $slug.csv ../Submission
 
