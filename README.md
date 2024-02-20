@@ -16,6 +16,8 @@ This is a guide to a MOSS Plagiarism Checker for Hacckerrank contests with custo
 ## Setup (just needed for the first time)
 1. Clone the repo   
    `git clone https://github.com/QubitMatrix/Automated_MOSS_Plagiarism_Checker.git`
+2. Ensure all dependencies are fulfilled   
+   `pip install -r requirements.txt`
 2. Move into the Scraper folder   
    `cd Automated_MOSS_Plagiarism_Checker/Scraper`
 3. Retrieve Cookie   
@@ -31,9 +33,12 @@ This is a guide to a MOSS Plagiarism Checker for Hacckerrank contests with custo
    > Eg: `bash ./automate.sh 1` can generate report for all contests with daa-s1-'section'   
    => Replace the sections list in `automate.sh` and `./Scraper/scraper_script.py` with the sections that you are handling  
 
-> If execution gives an error `/usr/bin/env: ‘bash\r’: No such file or directory` it might be due to npm not being installed, install npm on the WSL distro and try again
+> If execution gives an error `/usr/bin/env: ‘bash\r’: No such file or directory` it might be due to npm not being installed, install npm on the WSL distro and try again   
 
-The final link will be available in `./moss/plagiarismReport.csv`   
-The list of students with plagiarism above threshold will be stored in individual files `'contest_slug'.txt`   
+> `FetchError: invalid json response body at https://www.hackerrank.com/rest/contests` error might be caused if the cookies have changed recheck if the cookie value given in start.sh and the admin contest page match   
+
+The final plagiarism links will be available in `./moss/plagiarismReport.csv`   
+The list of students with plagiarism above threshold will be stored in individual files `./moss/'contest_slug'.txt`   
+The scores extracted from the leaderboard will be stored in `./Scraper/Results`   
 
 If you have questions or ideas, just drop them in the issues section!
