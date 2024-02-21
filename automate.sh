@@ -11,9 +11,9 @@ cd Scraper
 mkdir -p Results
 npm install
 python3 scraper_script.py "$session"
-for slug in ${array[@]};
+for section in ${array[@]};
 do
-    slug="daa-s$session-$slug"
+    slug="daa-s$session-$section"
 	python3 leaderboard.py "https://www.hackerrank.com/contests/$slug/leaderboard"
     echo $slug
     cp $slug.csv ../Submission
@@ -30,10 +30,14 @@ do
     touch temp.txt plagiarismReport.csv
     python3 run_moss.py $slug
 
-    # Clear all intermediate files and folders generated and go to Scraper
+    # Clear all intermediate files and folders generated
     rm -rf hwX_join hwX_prune Submissions
     truncate -s 0 ./temp.txt
-    cd ../Scraper
+	
+	# Generate final list from leaderboard and deduction after plagiarism and go to Scraper
+	cd ../Scraper/Results/
+	python3 fill_excel.py $section $session
+	cd ../
 done
 
 echo -e "Plagiarism links will be available in ./moss/plagiarismReport.csv\n"
