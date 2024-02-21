@@ -26,6 +26,8 @@ This is a guide to a MOSS Plagiarism Checker for Hacckerrank contests with custo
 4. Give execution permission to start.sh and moss.pl   
       `chmod u+x start.sh`   
       `chmod u+x ../moss/moss.pl`
+5. Save a file with all students SRN   
+   For each section handled create a file `all_srn_'section'.txt` in the `Scraper/Results` directory. This file should contain the sorted list of all SRN as given in the shared excel sheet
 
 ## Execution
 1. Move back to the main directory and execute the script   
@@ -40,5 +42,7 @@ This is a guide to a MOSS Plagiarism Checker for Hacckerrank contests with custo
 The final plagiarism links will be available in `./moss/plagiarismReport.csv`   
 The list of students with plagiarism above threshold will be stored in individual files `./moss/'contest_slug'.txt`   
 The scores extracted from the leaderboard will be stored in `./Scraper/Results`   
+
+**The only file required to fill the marksheet is the `'contestslug'-final.csv` in the `Scraper/Results` directory.**   
 
 If you have questions or ideas, just drop them in the issues section!
