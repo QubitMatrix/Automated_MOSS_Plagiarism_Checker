@@ -14,7 +14,11 @@ python3 scraper_script.py "$session"
 for section in ${array[@]};
 do
     slug="daa-s$session-$section"
-	python3 leaderboard.py "https://www.hackerrank.com/contests/$slug/leaderboard"
+	file1="./Results/$slug.csv"
+	if [ ! -f $file1 ];
+	then
+		python3 leaderboard.py "https://www.hackerrank.com/contests/$slug/leaderboard"
+	fi
     echo $slug
     cp $slug.csv ../Submission
 
@@ -30,16 +34,20 @@ do
     touch temp.txt plagiarismReport.csv
     python3 run_moss.py $slug
 
-    # Clear all intermediate files and folders generated
+    # Clear all intermediate files and folders generated and go to Scraper
     rm -rf hwX_join hwX_prune Submissions
     truncate -s 0 ./temp.txt
-	
-	# Generate final list from leaderboard and deduction after plagiarism and go to Scraper
-	cd ../Scraper/Results/
-	python3 fill_excel.py $section $session
-	cd ../
+	cd ../Scraper
 done
 
 echo -e "Plagiarism links will be available in ./moss/plagiarismReport.csv\n"
 cd ../moss
 bash ./gen_list.sh
+
+for section in ${array[@]};
+do
+	# Generate final list from leaderboard and deduction after plagiarism
+	cd ../Scraper/Results/
+	python3 fill_excel.py $section $session
+	cd ../
+done
