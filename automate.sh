@@ -1,5 +1,5 @@
 session=$1 
-array=('a' 'b' 'c' 'd' 'e' 'f' 'g' 'h' 'i' 'j' 'k')
+array=('a' 'b' 'c' 'd' 'e' 'f' 'g' 'h' 'i' 'j' 'k' 'a_aiml' 'b_aiml')
 touch ./moss/plagiarismReport.csv
 if [ ! -s "./moss/plagiarismReport.csv" ];
 then
