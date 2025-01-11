@@ -1,5 +1,6 @@
 session=$1 
 array=('a' 'b' 'c' 'd' 'e' 'f' 'g' 'h' 'i' 'j' 'k' 'a_aiml' 'b_aiml')
+year=$(date '+%Y')
 touch ./moss/plagiarismReport.csv
 if [ ! -s "./moss/plagiarismReport.csv" ];
 then
@@ -13,7 +14,7 @@ npm install
 python3 scraper_script.py "$session"
 for section in ${array[@]};
 do
-    slug="daa-s$session-$section"
+    slug="daa-s$session-$section-$year"
 	file1="./Results/$slug.csv"
 	if [ ! -f $file1 ];
 	then

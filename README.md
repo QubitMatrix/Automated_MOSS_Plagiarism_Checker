@@ -32,7 +32,7 @@ This is a guide to a MOSS Plagiarism Checker for Hacckerrank contests with custo
 ## Execution
 1. Move back to the main directory and execute the script   
    `cd ../ && bash ./automate.sh "enter session number here"`   
-   > Eg: `bash ./automate.sh 1` can generate report for all contests with daa-s1-'section'   
+   > Eg: `bash ./automate.sh 1` can generate report for all contests with daa-s1-'section'-'year'   
    => Replace the sections list in `automate.sh` and `./Scraper/scraper_script.py` with the sections that you are handling, not changing the sections will lead to invalid json response errors.  
 
 > If execution gives an error `/usr/bin/env: ‘bash\r’: No such file or directory` it might be due to npm not being installed, install npm on the WSL distro and try again   

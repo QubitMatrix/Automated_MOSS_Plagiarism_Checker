@@ -1,12 +1,15 @@
 import sys
 import re
+from datetime import date
+
+year = str(date.today().year)
 allsrn = open("all_srn_"+sys.argv[1]+".txt","r")
 all_list = allsrn.readlines()
-leaderboardsrn = open("daa-s"+sys.argv[2]+"-"+sys.argv[1]+".csv","r")
+leaderboardsrn = open("daa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+".csv","r")
 lead_list = leaderboardsrn.readlines()
-plagsrn = open("../../moss/daa-s"+sys.argv[2]+"-"+sys.argv[1]+".txt","r")
+plagsrn = open("../../moss/daa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+".txt","r")
 plag_list = plagsrn.readlines()
-file1 = open("daa-s"+sys.argv[2]+"-"+sys.argv[1]+"-final.csv", "w")
+file1 = open("daa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+"-final.csv", "w")
 pattern = r"^pes2ug22cs[0-9][0-9][0-9]$"
 for x in all_list:
     flag=0
