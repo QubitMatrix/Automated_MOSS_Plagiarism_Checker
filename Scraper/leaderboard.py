@@ -3,14 +3,19 @@ import numpy as np
 import pandas as pd
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 
 def getLeaderBoard(url):
     options = Options()
-    options.add_argument('-headless')
-    browser = webdriver.Firefox(options=options)
+    #options.add_argument('--headless') # Uncomment to run without GUI but may not work correctly always
+    #options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 
     maxPage = 14  # Set the maxPage limit
