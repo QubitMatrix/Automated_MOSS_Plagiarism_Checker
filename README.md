@@ -4,7 +4,7 @@ This is a guide to a MOSS Plagiarism Checker for Hacckerrank contests with custo
 ## Download dependencies
    - Perl
    - Node (>=18)
-   - Selenium
+   - Selenium - https://github.com/password123456/setup-selenium-with-chrome-driver-on-ubuntu_debian
    - npm 
 
 ## Important Note
