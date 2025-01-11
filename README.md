@@ -33,16 +33,18 @@ This is a guide to a MOSS Plagiarism Checker for Hacckerrank contests with custo
 1. Move back to the main directory and execute the script   
    `cd ../ && bash ./automate.sh "enter session number here"`   
    > Eg: `bash ./automate.sh 1` can generate report for all contests with daa-s1-'section'   
-   => Replace the sections list in `automate.sh` and `./Scraper/scraper_script.py` with the sections that you are handling  
+   => Replace the sections list in `automate.sh` and `./Scraper/scraper_script.py` with the sections that you are handling, not changing the sections will lead to invalid json response errors.  
 
 > If execution gives an error `/usr/bin/env: ‘bash\r’: No such file or directory` it might be due to npm not being installed, install npm on the WSL distro and try again   
 
 > `FetchError: invalid json response body at https://www.hackerrank.com/rest/contests` error might be caused if the cookies have changed recheck if the cookie value given in start.sh and the admin contest page match   
 
-The final plagiarism links will be available in `./moss/plagiarismReport.csv`   
-The list of students with plagiarism above threshold will be stored in individual files `./moss/'contest_slug'.txt`   
-The scores extracted from the leaderboard will be stored in `./Scraper/Results`   
+## Results
+- The final plagiarism links will be available in `./moss/plagiarismReport.csv`   
+- The list of students with plagiarism above threshold will be stored in individual files `./moss/'contest_slug'.txt`   
+- The scores extracted from the leaderboard will be stored in `./Scraper/Results`
 
 **The only file required to fill the marksheet is the `'contestslug'-final.csv` in the `Scraper/Results` directory.**   
+  > If any student's username doesn't follow the naming convention their results will be stored at the end of this file and will have to be manually handled.
 
 If you have questions or ideas, just drop them in the issues section!
