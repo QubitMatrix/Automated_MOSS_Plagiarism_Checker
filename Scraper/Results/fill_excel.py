@@ -25,7 +25,7 @@ for x in all_list:
             for z in plag_list:
                 z=z.split()[0].lower()
                 if(z==x):
-                    print(x+","+y[2]+","+str(eval(y[2])*0.6), file=file1)
+                    print(x+","+y[2]+","+str(eval(y[2])*0.4), file=file1)
                     pla_flag=1
                     break
             if(pla_flag==0):
