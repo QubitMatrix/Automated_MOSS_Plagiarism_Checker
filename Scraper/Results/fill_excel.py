@@ -16,8 +16,8 @@ pattern = re.compile("|".join([pattern1, pattern2]))
 for x in all_list:
     flag=0
     for y in lead_list:
-        x=x.strip("\n").lower()
-        y=y.strip("\n")
+        x=x.strip("\n").strip().lower()
+        y=y.strip("\n").strip()
         y=y.split(",")
         srn=y[1].lower()
         pla_flag=0
