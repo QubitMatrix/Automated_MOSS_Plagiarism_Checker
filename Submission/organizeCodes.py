@@ -12,7 +12,7 @@ with open(sys.argv[2].split('/')[-1],'r') as f:
     for line in reader:
         if(os.path.exists(os.path.join(os.getcwd(),directory,line[1])) == False):
            os.mkdir(os.path.join(os.getcwd(),directory,line[1]))
-        newname = line[2].replace(' ','_')
+        newname = line[2].replace(' ','_').replace('"','').replace("'",'')
         if(newname not in challangeNames):
             challangeNames.append(newname)
         filename = os.path.join(os.getcwd(),directory,line[1],newname+'.c')
