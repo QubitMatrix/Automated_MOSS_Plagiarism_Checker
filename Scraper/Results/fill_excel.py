@@ -23,17 +23,18 @@ for x in all_list:
         pla_flag=0
         if(x==srn):
             for z in plag_list:
-                z=z.split()[0].lower()
-                if(z==x):
-                    print(x+","+y[2]+","+str(eval(y[2])*0.4), file=file1)
+                z_srn=z.split()[0].lower()
+                z_plag=z.split()[1][1:-1]
+                if(z_srn==x):
+                    print(x+","+y[2]+","+str(eval(y[2])*0.4)+","+z_plag, file=file1)
                     pla_flag=1
                     break
             if(pla_flag==0):
-                print(x+","+y[2]+","+y[2], file=file1)
+                print(x+","+y[2]+","+y[2]+",-", file=file1)
             flag=1
             break
     if(flag==0):
-        print(x+",0,0", file=file1)
+        print(x+",0,0,-", file=file1)
 for x in lead_list:
     x=x.split(",")
     srn=x[1].lower()
