@@ -10,9 +10,7 @@ lead_list = leaderboardsrn.readlines()
 plagsrn = open("../../moss/daa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+".txt","r")
 plag_list = plagsrn.readlines()
 file1 = open("daa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+"-final.csv", "w")
-pattern1 = r"^pes2ug23cs[0-9][0-9][0-9]$"
-pattern2 = r"^pes2ug24cs[0-9][0-9][0-9]$"
-pattern = re.compile("|".join([pattern1, pattern2]))
+pattern = r'^pes2ug2[2-4](cs|am)[0-9]{3}$'
 for x in all_list:
     flag=0
     for y in lead_list:
