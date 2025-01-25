@@ -4,41 +4,42 @@ from datetime import date
 
 year = str(date.today().year)
 allsrn = open("all_srn_"+sys.argv[1]+".txt","r")
-all_list = allsrn.readlines()
+all_list = allsrn.readlines() # List of students SRN
 leaderboardsrn = open("daa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+".csv","r")
-lead_list = leaderboardsrn.readlines()
+lead_list = leaderboardsrn.readlines() # List of all usernames in the leaderboard
 plagsrn = open("../../moss/daa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+".txt","r")
-plag_list = plagsrn.readlines()
-file1 = open("daa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+"-final.csv", "w")
+plag_list = plagsrn.readlines() # List of students with high plagiarism values
+output_file = open("daa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+"-final.csv", "w")
 pattern = r'pes2ug2[2-4](cs|am)[0-9]{3}'
-for x in all_list:
+for student in all_list:
     flag=0
-    for y in lead_list:
-        x=x.strip("\n").strip().lower()
-        y=y.strip("\n").strip()
-        y=y.split(",")
-        srn=y[1].lower()
-        pla_flag=0
-        if(x in srn):
-            for z in plag_list:
-                z_srn=z.split()[0].lower()
-                z_plag=z.split()[1][1:-1]
-                if(x in z_srn):
-                    print(x+","+y[2]+","+str(eval(y[2])*0.4)+","+z_plag, file=file1)
-                    pla_flag=1
+    for user_entry in lead_list:
+        student = student.strip("\n").strip().lower()
+        user_entry = user_entry.strip("\n").strip()
+        user_entry = user_entry.split(",")
+        username = user_entry[1].lower()
+        score = user_entry[2]
+        pla_flag = 0
+        if(student in username):
+            for plag_entry in plag_list:
+                plag_srn = plag_entry.split()[0].lower()
+                plag_val = plag_entry.split()[1][1:-1]
+                if(student in plag_srn):
+                    print(student+","+score+","+str(eval(score)*0.4)+","+plag_val, file=output_file)
+                    pla_flag = 1
                     break
             if(pla_flag==0):
-                print(x+","+y[2]+","+y[2]+",-", file=file1)
-            flag=1
+                print(student+","+score+","+score+",-", file=output_file)
+            flag = 1
             break
     if(flag==0):
-        print(x+",0,0,-", file=file1)
-for x in lead_list:
-    x=x.split(",")
-    srn=x[1].lower()
-    if(not bool(re.search(pattern,srn))):
-        print(srn+","+x[2], file=file1)
+        print(student+",0,0,-", file=output_file)
+for user_entry in lead_list:
+    user_entry = user_entry.split(",")
+    username = user_entry[1].lower()
+    if(not bool(re.search(pattern,username))):
+        print(username+","+user_entry[2], file=output_file)
 allsrn.close()
 leaderboardsrn.close()
 plagsrn.close()
-file1.close()
+output_file.close()

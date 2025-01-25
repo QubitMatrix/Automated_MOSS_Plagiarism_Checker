@@ -1,5 +1,5 @@
 session=$1 
-array=('a' 'b' 'c' 'd' 'e' 'f' 'g' 'h' 'i' 'j' 'k' 'a-aiml' 'b-aiml')
+sections=('a' 'b' 'c' 'd' 'e' 'f' 'g' 'h' 'i' 'j' 'k' 'a-aiml' 'b-aiml')
 year=$(date '+%Y')
 touch ./moss/plagiarismReport.csv
 if [ ! -s "./moss/plagiarismReport.csv" ];
@@ -12,7 +12,7 @@ cd Scraper
 mkdir -p Results
 npm install
 python3 scraper_script.py "$session"
-for section in ${array[@]};
+for section in ${sections[@]};
 do
     slug="daa-s$session-$section-$year"
 	file1="./Results/$slug.csv"
@@ -45,7 +45,7 @@ echo -e "Plagiarism links will be available in ./moss/plagiarismReport.csv\n"
 cd ../moss
 bash ./gen_list.sh
 
-for section in ${array[@]};
+for section in ${sections[@]};
 do
 	# Generate final list from leaderboard and deduction after plagiarism
 	cd ../Scraper/Results/
