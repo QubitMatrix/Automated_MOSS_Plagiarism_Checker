@@ -10,7 +10,7 @@ lead_list = leaderboardsrn.readlines()
 plagsrn = open("../../moss/daa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+".txt","r")
 plag_list = plagsrn.readlines()
 file1 = open("daa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+"-final.csv", "w")
-pattern = r'^pes2ug2[2-4](cs|am)[0-9]{3}$'
+pattern = r'pes2ug2[2-4](cs|am)[0-9]{3}'
 for x in all_list:
     flag=0
     for y in lead_list:
@@ -19,11 +19,11 @@ for x in all_list:
         y=y.split(",")
         srn=y[1].lower()
         pla_flag=0
-        if(x==srn):
+        if(x in srn):
             for z in plag_list:
                 z_srn=z.split()[0].lower()
                 z_plag=z.split()[1][1:-1]
-                if(z_srn==x):
+                if(x in z_srn):
                     print(x+","+y[2]+","+str(eval(y[2])*0.4)+","+z_plag, file=file1)
                     pla_flag=1
                     break
@@ -36,7 +36,7 @@ for x in all_list:
 for x in lead_list:
     x=x.split(",")
     srn=x[1].lower()
-    if(not bool(re.match(pattern,srn))):
+    if(not bool(re.search(pattern,srn))):
         print(srn+","+x[2], file=file1)
 allsrn.close()
 leaderboardsrn.close()
