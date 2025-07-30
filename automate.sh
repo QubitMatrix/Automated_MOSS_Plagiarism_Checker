@@ -14,7 +14,7 @@ npm install
 python3 scraper_script.py "$session"
 for section in ${sections[@]};
 do
-    slug="daa-s$session-$section-$year"
+    slug="dsa-s$session-$section-$year"
 	file1="./Results/$slug.csv"
 	if [ ! -f $file1 ];
 	then

@@ -5,11 +5,11 @@ from datetime import date
 year = str(date.today().year)
 allsrn = open("all_srn_"+sys.argv[1]+".txt","r")
 all_list = allsrn.readlines() # List of students SRN
-leaderboardsrn = open("daa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+".csv","r")
+leaderboardsrn = open("dsa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+".csv","r")
 lead_list = leaderboardsrn.readlines() # List of all usernames in the leaderboard
-plagsrn = open("../../moss/daa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+".txt","r")
+plagsrn = open("../../moss/dsa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+".txt","r")
 plag_list = plagsrn.readlines() # List of students with high plagiarism values
-output_file = open("daa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+"-final.csv", "w")
+output_file = open("dsa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+"-final.csv", "w")
 pattern = r'pes2ug2[2-4](cs|am)[0-9]{3}'
 for student in all_list:
     flag=0
