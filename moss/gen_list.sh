@@ -7,6 +7,6 @@ do
 	if [ ! -f $contest.txt -a ! -f $slug ]
 	then
 		wget $url 
-		grep -i -o PES.*[4-9][0-9]%\) $slug | sed s/"_join.c"/""/g > $contest.txt #Gets all the students plagiarism in a text file
+		grep -i -o PES.*[6-9][0-9]%\) $slug | sed s/"_join.c"/""/g > $contest.txt #Gets all the students plagiarism in a text file
 	fi
 done < "plagiarismReport.csv"
