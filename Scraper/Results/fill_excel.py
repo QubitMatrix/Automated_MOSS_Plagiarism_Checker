@@ -10,7 +10,7 @@ lead_list = leaderboardsrn.readlines() # List of all usernames in the leaderboar
 plagsrn = open("../../moss/dsa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+".txt","r")
 plag_list = plagsrn.readlines() # List of students with high plagiarism values
 output_file = open("dsa-s"+sys.argv[2]+"-"+sys.argv[1]+"-"+year+"-final.csv", "w")
-pattern = r'pes2ug2[2-4](cs|am)[0-9]{3}'
+pattern = r'pes2ug2[3-5](cs|am)[0-9]{3}'
 for student in all_list:
     flag=0
     for user_entry in lead_list:
